@@ -1,0 +1,56 @@
+class ZarzadzanieZadaniami:
+
+    def __init__(self):
+        self.zadania = []
+    def dodaj_zadanie(self, zadanie):
+        self.zadania.append({"tresc": zadanie, "zakonczone": False})
+    def usun_zadanie(self, indeks):
+        if 0 <= indeks < len(self.zadania):
+            del self.zadania[indeks]
+        else:
+            print("Nieprawidłowy indeks zadania.")
+    def oznacz_jako_zakonczone(self, indeks):
+        if 0 <= indeks < len(self.zadania):
+            self.zadania[indeks]["zakonczone"]=True
+        else:
+            print(f"{indeks} Nieprawidłowy indeka zadania.")
+    def wyswietl_zadania(self):
+        print("Lista zdań: ")
+        for i, zadanie in enumerate(self.zadania):
+            status = "Zakończone" if zadanie["zakonczone"] else 'oczekujące'
+            print(f"{i + 1}. {zadanie['tresc']} ({status})")
+
+
+
+
+if __name__ == "__main__":
+    aplikacja  = ZarzadzanieZadaniami()
+
+
+    while  True:
+        print("\nMenu:")
+        print("1. Dodaj zadanie")
+        print("2. Usuń zadanie")
+        print("3. Oznacz jako zakończone")
+        print("4. Wyświetl zadania")
+        print("5. Wyjście")
+        wybor = int(input("Wybierz opcję: "))
+
+        if wybor == 1:
+            tresc = (input("Podaj tresc zadania: "))
+            aplikacja.dodaj_zadanie(tresc)
+
+        elif wybor == 2:
+            indeks = int(input("Podaj indeks zadania do usunięcia: ")) - 1
+            aplikacja.usun_zadanie(indeks)
+        elif wybor == 3:
+            indeks = int(input("Podaj indeks zadania: ")) - 1
+            aplikacja.oznacz_jako_zakonczone(indeks)
+        elif wybor == 4:
+            aplikacja.wyswietl_zadania()
+        elif wybor == 5:
+            break
+        else:
+            print("Nieprawidłowy wybór. Spróbuj ponownie.")
+
+
